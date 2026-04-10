@@ -26,5 +26,5 @@ RUN mkdir -p jobs outputs
 
 EXPOSE 8501
 
-# Your exact command
-CMD ["bash", "-c", "streamlit run app.py --server.port=${PORT} --server.address=0.0.0.0"]
+# YOUR EXACT COMMAND
+CMD ["bash", "-c", "streamlit run app.py --server.port=${PORT:-8080} --server.address=0.0.0.0"]

@@ -10,7 +10,7 @@
     },
     "OLLAMA_URL": {
       "description": "Ollama URL (optional)",
-      "required": true
+      "required": false
     }
   }
 }
