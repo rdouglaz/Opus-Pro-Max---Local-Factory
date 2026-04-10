@@ -17,20 +17,14 @@ RUN sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy dom
 
 WORKDIR /app
 
-# Copy requirements first for better caching
 COPY requirements.txt .
-
-# Install Python packages
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of your application
 COPY . .
 
-# Create required folders
 RUN mkdir -p jobs outputs
 
-# Railway automatically injects $PORT
 EXPOSE 8501
 
-# Run the app
-CMD ["streamlit", "run", "app.py", "--server.port=${PORT:-8501}", "--server.address=0.0.0.0"]
+# FIXED: Use shell form so ${PORT} expands correctly
+CMD streamlit run app.py --server.port=${PORT} --server.address=0.0.0.0
