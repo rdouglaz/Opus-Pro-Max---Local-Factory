@@ -3,18 +3,14 @@
   "build": {
     "builder": "DOCKERFILE"
   },
-  "deploy": {
-    "startCommand": "sh -c 'streamlit run app.py --server.port=\[ PORT --server.address=0.0.0.0'",
-    "restartPolicyType": "ON_FAILURE"
-  },
   "env": {
     "DEEPGRAM_API_KEY": {
-      "description": "Your Deepgram API Key for transcription",
+      "description": "Your Deepgram API Key",
       "required": true
     },
     "OLLAMA_URL": {
       "description": "Ollama URL (optional)",
-      "required": false
+      "required": true
     }
   }
 }

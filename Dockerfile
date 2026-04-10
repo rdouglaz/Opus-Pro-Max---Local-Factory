@@ -26,5 +26,5 @@ RUN mkdir -p jobs outputs
 
 EXPOSE 8501
 
-# FIXED: Use sh -c with \[ PORT so the variable expands correctly at runtime
-CMD ["sh", "-c", "streamlit run app.py --server.port= \]PORT --server.address=0.0.0.0"]
+# Safe command that works on Railway
+CMD ["sh", "-c", "streamlit run app.py --server.port=$$PORT --server.address=0.0.0.0"]
