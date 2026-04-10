@@ -5,7 +5,7 @@
   },
   "env": {
     "DEEPGRAM_API_KEY": {
-      "description": "Your Deepgram API Key",
+      "description": "Your Deepgram API Key for transcription",
       "required": true
     },
     "OLLAMA_URL": {

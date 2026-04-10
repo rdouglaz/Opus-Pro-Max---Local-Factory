@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxrender-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Fix ImageMagick policy
+# Fix ImageMagick policy for TextClip
 RUN sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml || true
 
 WORKDIR /app
@@ -26,5 +26,5 @@ RUN mkdir -p jobs outputs
 
 EXPOSE 8501
 
-# Safe command that works on Railway
-CMD ["sh", "-c", "streamlit run app.py --server.port=$$PORT --server.address=0.0.0.0"]
+# Your exact command
+CMD ["bash", "-c", "streamlit run app.py --server.port=${PORT} --server.address=0.0.0.0"]
