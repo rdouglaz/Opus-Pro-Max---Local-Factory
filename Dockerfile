@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-# Install system dependencies (including OpenCV + ImageMagick fixes)
+# Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
     imagemagick \
@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxrender-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Fix ImageMagick policy for TextClip
+# Fix ImageMagick policy
 RUN sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml || true
 
 WORKDIR /app
@@ -26,5 +26,5 @@ RUN mkdir -p jobs outputs
 
 EXPOSE 8501
 
-# FIXED: Use shell form so ${PORT} expands correctly
-CMD streamlit run app.py --server.port=${PORT} --server.address=0.0.0.0
+# FIXED: Use sh -c with \[ PORT so the variable expands correctly at runtime
+CMD ["sh", "-c", "streamlit run app.py --server.port= \]PORT --server.address=0.0.0.0"]
